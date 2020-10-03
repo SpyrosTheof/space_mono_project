@@ -8,7 +8,6 @@ const initialState = {
 }
 
 const populateTableData=(state,action)=>{
-    console.log(action.payload)
     return updateObject(state,{tableData:action.payload})
 }
 
