@@ -1,0 +1,1 @@
+export {populateTableDataASync,populateTableDataSync,editTableDataASync} from './table';
