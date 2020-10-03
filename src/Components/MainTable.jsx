@@ -207,7 +207,7 @@ import * as actions from "../Store/actions/index"
         const [selected, setSelected] = React.useState([]);
         const [page, setPage] = React.useState(0);
         const [dense, setDense] = React.useState(false);
-        const [rowsPerPage, setRowsPerPage] = React.useState(10);
+        // const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
         useEffect(()=>{
             populateTableWithData()
@@ -270,10 +270,10 @@ import * as actions from "../Store/actions/index"
           setPage(newPage);
         };
       
-        const handleChangeRowsPerPage = (event) => {
-          setRowsPerPage(parseInt(event.target.value, 10));
-          setPage(0);
-        };
+        // const handleChangeRowsPerPage = (event) => {
+        //   setRowsPerPage(parseInt(event.target.value, 10));
+        //   setPage(0);
+        // };
       
         const handleChangeDense = (event) => {
           setDense(event.target.checked);
@@ -281,7 +281,7 @@ import * as actions from "../Store/actions/index"
       
         const isSelected = (name) => selected.indexOf(name) !== -1;
       
-        const emptyRows = tableData?rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage):null
+        // const emptyRows = tableData?rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage):null
       
         return (
           <div className={classes.root}>
@@ -308,7 +308,6 @@ import * as actions from "../Store/actions/index"
                         <TableBody
                         >
                         {stableSort(rows, getComparator(order, orderBy))
-                          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                           .map((row, index) => {
                             const isItemSelected = isSelected(row.name);
                             const labelId = `enhanced-table-checkbox-${index}`;
@@ -338,9 +337,9 @@ import * as actions from "../Store/actions/index"
                                 <Switch
              checked={row.status}
              onChange={(event)=>{
-                 row.active=!event.target.value
+                 row.status?row.status=false:row.status=true
                 console.log(row.active)
-                editTable({...row})
+                editTable({...row,active:row.status})
              }}
              value={row.status}
           /> 
@@ -348,11 +347,11 @@ import * as actions from "../Store/actions/index"
                               </TableRow>
                             );
                           })}
-                        {emptyRows > 0 && (
+                        {/* {emptyRows > 0 && (
                           <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                             <TableCell colSpan={6} />
                           </TableRow>
-                        )}
+                        )} */}
                       </TableBody>
 
                       ):null
