@@ -83,6 +83,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
+            color='primary'
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
@@ -127,6 +128,7 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
+    marginTop:100,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
   },
@@ -141,7 +143,8 @@ const useToolbarStyles = makeStyles((theme) => ({
           backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: "1 1 100%",
+    marginLeft:'auto',
+    fontSize:12
   },
 }));
 
@@ -161,13 +164,13 @@ const EnhancedTableToolbar = (props) => {
         className={classes.title}
         color="inherit"
         variant="subtitle1"
-        component="div"
+        component="div"   
       >
         {numSelected} selected
       </Typography>
 
       <IconButton aria-label="filter list">
-        <HelpOutlineIcon />
+        <HelpOutlineIcon style={{fontSize:'30'}} />
       </IconButton>
     </Toolbar>
   );
@@ -329,9 +332,11 @@ function MainTable(props) {
                         tabIndex={-1}
                         key={row.id}
                         selected={isItemSelected}
+
                       >
                         <TableCell padding="checkbox">
                           <Checkbox
+                            color='primary'
                             checked={isItemSelected}
                             inputProps={{ "aria-labelledby": labelId }}
                           />
@@ -341,6 +346,7 @@ function MainTable(props) {
                           id={labelId}
                           scope="row"
                           padding="none"
+                          style={{width:50,textAlign:'center'}}
                         >
                           {row.type.slice(0, 2)}
                         </TableCell>
@@ -349,6 +355,7 @@ function MainTable(props) {
                         <TableCell align="right">{row.telephone}</TableCell>
                         <TableCell align="right">
                           <Switch
+                            color='primary'
                             checked={row.status}
                             onChange={(e)=>onStatusChange(e,row)}
                             //  value={row.status}
